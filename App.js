@@ -3,17 +3,18 @@ import axios from 'axios'
 import NewsCom from './component/newscom'
 import './assets/css/style.css'
 
-function MapCom(props){
+function MapCom(props) {
   return (
     <div className="contentItem">
       <h1>
+        aaa 222
         这是疫情地图组件
       </h1>
     </div>
   )
 }
 
-function GzCom(props){
+function GzCom(props) {
   return (
     <div className="contentItem">
       <h1>
@@ -23,7 +24,7 @@ function GzCom(props){
   )
 }
 
-function XcCom(props){
+function XcCom(props) {
   return (
     <div className="contentItem">
       <h1>
@@ -35,42 +36,42 @@ function XcCom(props){
 
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      newData:null,
-      navList:['疫情地图','最新进展',"广州疫情","直击现场"],
-      tabIndex:0,
-      barStyle:{
-        left:'22px'
+      newData: null,
+      navList: ['疫情地图', '最新进展', "广州疫情", "直击现场"],
+      tabIndex: 0,
+      barStyle: {
+        left: '22px'
       },
-      contentStyle:{
-        transform:'translate(0,0)'
+      contentStyle: {
+        transform: 'translate(0,0)'
       }
     }
   }
-  async componentWillMount(){
+  async componentWillMount() {
     let res = await axios.get('http://localhost:8080/api/newsdata')
     console.log(res.data)
-    let data = JSON.parse(res.data.forum.extra.ncov_string_list) 
-    console.log(data) 
+    let data = JSON.parse(res.data.forum.extra.ncov_string_list)
+    console.log(data)
   }
-  render(){
+  render() {
     return (
       <div className="App">
         <div className="nav">
           {
-            this.state.navList.map((item,index)=>{
-              if(index===this.state.tabIndex){
+            this.state.navList.map((item, index) => {
+              if (index === this.state.tabIndex) {
                 return (
-                  <div key={index} onClick={(event)=> {this.tabClickEvent(index)}} className="navItem active">{item}</div>
+                  <div key={index} onClick={(event) => { this.tabClickEvent(index) }} className="navItem active">{item}</div>
                 )
-              }else{
+              } else {
                 return (
-                  <div key={index} onClick={(event)=> {this.tabClickEvent(index)}} className="navItem">{item}</div>
+                  <div key={index} onClick={(event) => { this.tabClickEvent(index) }} className="navItem">{item}</div>
                 )
               }
-              
+
             })
           }
 
@@ -82,20 +83,20 @@ class App extends React.Component {
           <NewsCom></NewsCom>
           <GzCom></GzCom>
           <XcCom></XcCom>
-          
+
         </div>
-        
+
       </div>
     );
   }
-  tabClickEvent=(index)=>{
+  tabClickEvent = (index) => {
     console.log(index);
     this.setState({
-      barStyle:{
-        left:(index*88+22)+"px"
+      barStyle: {
+        left: (index * 88 + 22) + "px"
       },
-      contentStyle:{
-        transform:`translate(-${index*375}px,0)`
+      contentStyle: {
+        transform: `translate(-${index * 375}px,0)`
       }
     })
   }
