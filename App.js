@@ -8,6 +8,7 @@ function MapCom(props) {
     <div className="contentItem">
       <h1>
         aaa 222
+        aaa 444
         这是疫情地图组件
       </h1>
     </div>
